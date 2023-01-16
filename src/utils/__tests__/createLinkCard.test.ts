@@ -5,80 +5,87 @@ import {
   createLinkCardFromUrl,
 } from '../createLinkCard';
 
-describe.concurrent('createLinkCardFromUrl()', () => {
-  it('should return a LinkCard object for http://example.com/', async () => {
-    expect(
-      await createLinkCardFromUrl(new URL('http://example.com/')),
-    ).toStrictEqual({
-      url: 'http://example.com/',
-      title: 'Example Domain',
-      description: undefined,
-      faviconUrl: 'http://example.com/favicon.ico',
-      ogImageUrl: undefined,
-    } satisfies LinkCard);
-  });
+describe.concurrent(
+  'createLinkCardFromUrl()',
+  () => {
+    it('should return a LinkCard object for http://example.com/', async () => {
+      expect(
+        await createLinkCardFromUrl(new URL('http://example.com/')),
+      ).toStrictEqual({
+        url: 'http://example.com/',
+        title: 'Example Domain',
+        description: undefined,
+        faviconUrl: 'http://example.com/favicon.ico',
+        ogImageUrl: undefined,
+      } satisfies LinkCard);
+    });
 
-  it('should return a LinkCard object for https://ogp.me/', async () => {
-    expect(
-      await createLinkCardFromUrl(new URL('https://ogp.me/')),
-    ).toStrictEqual({
-      url: 'https://ogp.me/',
-      title: 'Open Graph protocol',
-      description:
-        'The Open Graph protocol enables any web page to become a rich object in a social graph.',
-      faviconUrl: 'https://ogp.me/favicon.ico',
-      ogImageUrl: 'https://ogp.me/logo.png',
-    } satisfies LinkCard);
-  });
+    it('should return a LinkCard object for https://ogp.me/', async () => {
+      expect(
+        await createLinkCardFromUrl(new URL('https://ogp.me/')),
+      ).toStrictEqual({
+        url: 'https://ogp.me/',
+        title: 'Open Graph protocol',
+        description:
+          'The Open Graph protocol enables any web page to become a rich object in a social graph.',
+        faviconUrl: 'https://ogp.me/favicon.ico',
+        ogImageUrl: 'https://ogp.me/logo.png',
+      } satisfies LinkCard);
+    });
 
-  it('should return a LinkCard object for https://www.w3.org/', async () => {
-    expect(
-      await createLinkCardFromUrl(new URL('https://www.w3.org/')),
-    ).toStrictEqual({
-      url: 'https://www.w3.org/',
-      title: 'World Wide Web Consortium (W3C)',
-      description:
-        'The World Wide Web Consortium (W3C) is an international community where Member organizations, a full-time staff, and the public work together to develop Web standards.',
-      faviconUrl: 'https://www.w3.org/2008/site/images/favicon.ico',
-      ogImageUrl: undefined,
-    } satisfies LinkCard);
-  });
+    it('should return a LinkCard object for https://www.w3.org/', async () => {
+      expect(
+        await createLinkCardFromUrl(new URL('https://www.w3.org/')),
+      ).toStrictEqual({
+        url: 'https://www.w3.org/',
+        title: 'World Wide Web Consortium (W3C)',
+        description:
+          'The World Wide Web Consortium (W3C) is an international community where Member organizations, a full-time staff, and the public work together to develop Web standards.',
+        faviconUrl: 'https://www.w3.org/2008/site/images/favicon.ico',
+        ogImageUrl: undefined,
+      } satisfies LinkCard);
+    });
 
-  it('should return a LinkCard object for https://ogp.me/foobarbaz', async () => {
-    // Not Found
-    expect(
-      await createLinkCardFromUrl(new URL('https://ogp.me/foobarbaz')),
-    ).toStrictEqual({
-      url: 'https://ogp.me/foobarbaz',
-      title: undefined,
-      description: undefined,
-      faviconUrl: 'https://ogp.me/favicon.ico',
-      ogImageUrl: undefined,
-    } satisfies LinkCard);
-  });
+    it('should return a LinkCard object for https://ogp.me/foobarbaz', async () => {
+      // Not Found
+      expect(
+        await createLinkCardFromUrl(new URL('https://ogp.me/foobarbaz')),
+      ).toStrictEqual({
+        url: 'https://ogp.me/foobarbaz',
+        title: undefined,
+        description: undefined,
+        faviconUrl: 'https://ogp.me/favicon.ico',
+        ogImageUrl: undefined,
+      } satisfies LinkCard);
+    });
 
-  it('should return a LinkCard object for https://ogp.me/logo.png', async () => {
-    // Not HTML
-    expect(
-      await createLinkCardFromUrl(new URL('https://ogp.me/logo.png')),
-    ).toStrictEqual({
-      url: 'https://ogp.me/logo.png',
-      title: undefined,
-      description: undefined,
-      faviconUrl: 'https://ogp.me/favicon.ico',
-      ogImageUrl: undefined,
-    } satisfies LinkCard);
-  });
+    it('should return a LinkCard object for https://ogp.me/logo.png', async () => {
+      // Not HTML
+      expect(
+        await createLinkCardFromUrl(new URL('https://ogp.me/logo.png')),
+      ).toStrictEqual({
+        url: 'https://ogp.me/logo.png',
+        title: undefined,
+        description: undefined,
+        faviconUrl: 'https://ogp.me/favicon.ico',
+        ogImageUrl: undefined,
+      } satisfies LinkCard);
+    });
 
-  it('should return a LinkCard object for http://example.invalid/', async () => {
-    // Network Error
-    expect(
-      await createLinkCardFromUrl(new URL('http://example.invalid/')),
-    ).toStrictEqual({
-      url: 'http://example.invalid/',
-    } satisfies LinkCard);
-  });
-});
+    it('should return a LinkCard object for http://example.invalid/', async () => {
+      // Network Error
+      expect(
+        await createLinkCardFromUrl(new URL('http://example.invalid/')),
+      ).toStrictEqual({
+        url: 'http://example.invalid/',
+      } satisfies LinkCard);
+    });
+  },
+  {
+    timeout: 10000,
+    retry: 3,
+  },
+);
 
 describe('createLinkCardFromHtml()', () => {
   it('should return a LinkCard object', () => {
