@@ -1,0 +1,39 @@
+{
+  "name": "link-card",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "run-p --aggregate-output --continue-on-error --print-label 'lint:*'",
+    "lint:eslint": "eslint --color --ext .js,.ts,.jsx,.tsx .",
+    "lint:prettier": "FORCE_COLOR=1 prettier --check .",
+    "format": "run-s --print-label format:eslint format:prettier",
+    "format:eslint": "eslint --color --ext .js,.ts,.jsx,.tsx --fix .",
+    "format:prettier": "FORCE_COLOR=1 prettier --write .",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "ky": "^0.33.2",
+    "next": "^13.1.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "@types/react": "^18.0.26",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "eslint": "^8.32.0",
+    "eslint-config-next": "^13.1.2",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-standard-with-typescript": "^27.0.1",
+    "eslint-plugin-import": "^2.27.4",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.8.3",
+    "typescript": "4.9.4"
+  },
+  "packageManager": "yarn@3.3.1"
+}
