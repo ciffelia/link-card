@@ -6,7 +6,7 @@ import {
 } from '../createLinkCard';
 
 describe('createLinkCardFromUrl()', () => {
-  it('should return a LinkCard object', async () => {
+  it('should return a LinkCard object for valid pages', async () => {
     expect(
       await createLinkCardFromUrl(new URL('http://example.com/')),
     ).toStrictEqual({
@@ -27,7 +27,9 @@ describe('createLinkCardFromUrl()', () => {
       faviconUrl: 'https://ogp.me/favicon.ico',
       ogImageUrl: 'https://ogp.me/logo.png',
     } satisfies LinkCard);
+  });
 
+  it('should return a LinkCard object for invalid pages', async () => {
     // Not Found
     expect(
       await createLinkCardFromUrl(new URL('https://ogp.me/foobarbaz')),
