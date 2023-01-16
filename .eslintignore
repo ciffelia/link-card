@@ -9,5 +9,8 @@
 /build
 /next-env.d.ts
 
+# Coverage
+/coverage
+
 # WebStorm
 /.idea

@@ -25,6 +25,11 @@
     }
   },
 
-  "include": ["./next.config.js", "./next-env.d.ts", "./src/**/*"],
+  "include": [
+    "./next.config.js",
+    "./next-env.d.ts",
+    "./vitest.config.ts",
+    "./src/**/*"
+  ],
   "exclude": ["./node_modules"]
 }

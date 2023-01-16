@@ -25,7 +25,7 @@ export const extractOpenGraphImageUrl = (
   }
 };
 
-const extractOpenGraphProperty = (
+export const extractOpenGraphProperty = (
   $: cheerio.CheerioAPI,
   property: string,
 ): string | undefined =>
@@ -48,7 +48,7 @@ export const extractFaviconUrl = (
   }
 };
 
-const extractBaseUrl = ($: cheerio.CheerioAPI, pageUrl: URL): URL => {
+export const extractBaseUrl = ($: cheerio.CheerioAPI, pageUrl: URL): URL => {
   const baseHref = $('base').attr('href');
   if (baseHref === undefined) {
     return pageUrl;
