@@ -16,13 +16,10 @@ export const createLinkCardFromUrl = async (url: URL): Promise<LinkCard> => {
     return { url: url.toString() };
   }
 
-  return await createLinkCardFromHtml(html, url);
+  return createLinkCardFromHtml(html, url);
 };
 
-export const createLinkCardFromHtml = async (
-  html: string,
-  url: URL,
-): Promise<LinkCard> => {
+export const createLinkCardFromHtml = (html: string, url: URL): LinkCard => {
   const $ = cheerio.load(html);
 
   const title = extractTitle($);
