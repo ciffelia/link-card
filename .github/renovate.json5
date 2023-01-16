@@ -1,0 +1,26 @@
+{
+  extends: [
+    'config:base',
+    ':semanticCommitsDisabled',
+    ':prHourlyLimitNone',
+    ':prConcurrentLimitNone',
+  ],
+  timezone: 'Asia/Tokyo',
+  schedule: ['every weekend'],
+  packageRules: [
+    {
+      matchManagers: ['npm'],
+      rangeStrategy: 'bump',
+    },
+    {
+      matchManagers: ['npm'],
+      matchUpdateTypes: ['minor', 'patch'],
+      matchCurrentVersion: '!/^0/',
+      automerge: true,
+    },
+    {
+      matchPackageNames: ['@types/node'],
+      major: { enabled: false },
+    },
+  ],
+}
