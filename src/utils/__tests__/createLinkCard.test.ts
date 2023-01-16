@@ -27,6 +27,17 @@ describe('createLinkCardFromUrl()', () => {
       faviconUrl: 'https://ogp.me/favicon.ico',
       ogImageUrl: 'https://ogp.me/logo.png',
     } satisfies LinkCard);
+
+    expect(
+      await createLinkCardFromUrl(new URL('https://www.w3.org/')),
+    ).toStrictEqual({
+      url: 'https://www.w3.org/',
+      title: 'World Wide Web Consortium (W3C)',
+      description:
+        'The World Wide Web Consortium (W3C) is an international community where Member organizations, a full-time staff, and the public work together to develop Web standards.',
+      faviconUrl: 'https://www.w3.org/2008/site/images/favicon.ico',
+      ogImageUrl: undefined,
+    } satisfies LinkCard);
   });
 
   it('should return a LinkCard object for invalid pages', async () => {
