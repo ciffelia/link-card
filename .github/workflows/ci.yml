@@ -23,7 +23,12 @@ jobs:
           node-version: 18
           cache: yarn
       - run: yarn install --immutable
-      - run: yarn run coverage
+      - run: yarn run build
+      - run: |
+          yarn run start &
+          yarn run coverage
+        env:
+          LINK_CARD_TEST_URL: http://localhost:3000/
 
   lint:
     runs-on: ubuntu-22.04

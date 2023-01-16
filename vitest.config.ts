@@ -7,7 +7,10 @@ export default defineConfig({
     coverage: {
       all: true,
       include: ['src'],
-      exclude: [...(configDefaults.coverage.exclude ?? []), 'src/types'],
+      exclude: [
+        ...(configDefaults.coverage.exclude ?? []),
+        'src/{types,pages}',
+      ],
     },
   },
 });
