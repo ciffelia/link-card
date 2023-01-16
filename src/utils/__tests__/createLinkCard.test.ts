@@ -5,8 +5,8 @@ import {
   createLinkCardFromUrl,
 } from '../createLinkCard';
 
-describe('createLinkCardFromUrl()', () => {
-  it('should return a LinkCard object for valid pages', async () => {
+describe.concurrent('createLinkCardFromUrl()', () => {
+  it('should return a LinkCard object for http://example.com/', async () => {
     expect(
       await createLinkCardFromUrl(new URL('http://example.com/')),
     ).toStrictEqual({
@@ -16,7 +16,9 @@ describe('createLinkCardFromUrl()', () => {
       faviconUrl: 'http://example.com/favicon.ico',
       ogImageUrl: undefined,
     } satisfies LinkCard);
+  });
 
+  it('should return a LinkCard object for https://ogp.me/', async () => {
     expect(
       await createLinkCardFromUrl(new URL('https://ogp.me/')),
     ).toStrictEqual({
@@ -27,7 +29,9 @@ describe('createLinkCardFromUrl()', () => {
       faviconUrl: 'https://ogp.me/favicon.ico',
       ogImageUrl: 'https://ogp.me/logo.png',
     } satisfies LinkCard);
+  });
 
+  it('should return a LinkCard object for https://www.w3.org/', async () => {
     expect(
       await createLinkCardFromUrl(new URL('https://www.w3.org/')),
     ).toStrictEqual({
@@ -40,7 +44,7 @@ describe('createLinkCardFromUrl()', () => {
     } satisfies LinkCard);
   });
 
-  it('should return a LinkCard object for invalid pages', async () => {
+  it('should return a LinkCard object for https://ogp.me/foobarbaz', async () => {
     // Not Found
     expect(
       await createLinkCardFromUrl(new URL('https://ogp.me/foobarbaz')),
@@ -51,7 +55,9 @@ describe('createLinkCardFromUrl()', () => {
       faviconUrl: 'https://ogp.me/favicon.ico',
       ogImageUrl: undefined,
     } satisfies LinkCard);
+  });
 
+  it('should return a LinkCard object for https://ogp.me/logo.png', async () => {
     // Not HTML
     expect(
       await createLinkCardFromUrl(new URL('https://ogp.me/logo.png')),
@@ -62,7 +68,9 @@ describe('createLinkCardFromUrl()', () => {
       faviconUrl: 'https://ogp.me/favicon.ico',
       ogImageUrl: undefined,
     } satisfies LinkCard);
+  });
 
+  it('should return a LinkCard object for http://example.invalid/', async () => {
     // Network Error
     expect(
       await createLinkCardFromUrl(new URL('http://example.invalid/')),

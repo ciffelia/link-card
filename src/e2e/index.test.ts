@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import ky from 'ky';
 import { LinkCard } from '@/types/LinkCard';
 
-describe('/', () => {
+describe.concurrent('/', () => {
   if (process.env.LINK_CARD_TEST_URL === undefined) {
     throw new Error('LINK_CARD_TEST_URL is not set.');
   }
@@ -14,13 +14,15 @@ describe('/', () => {
     return await ky(url).json();
   };
 
-  it('should return a LinkCard object for valid pages', async () => {
+  it('should return a LinkCard object for http://example.com/', async () => {
     expect(await makeReq('http://example.com/')).toStrictEqual({
       url: 'http://example.com/',
       title: 'Example Domain',
       faviconUrl: 'http://example.com/favicon.ico',
     } satisfies LinkCard);
+  });
 
+  it('should return a LinkCard object for https://ogp.me/', async () => {
     expect(await makeReq('https://ogp.me/')).toStrictEqual({
       url: 'https://ogp.me/',
       title: 'Open Graph protocol',
@@ -29,7 +31,9 @@ describe('/', () => {
       faviconUrl: 'https://ogp.me/favicon.ico',
       ogImageUrl: 'https://ogp.me/logo.png',
     } satisfies LinkCard);
+  });
 
+  it('should return a LinkCard object for https://www.w3.org/', async () => {
     expect(await makeReq('https://www.w3.org/')).toStrictEqual({
       url: 'https://www.w3.org/',
       title: 'World Wide Web Consortium (W3C)',
@@ -39,19 +43,23 @@ describe('/', () => {
     } satisfies LinkCard);
   });
 
-  it('should return a LinkCard object for invalid pages', async () => {
+  it('should return a LinkCard object for https://ogp.me/foobarbaz', async () => {
     // Not Found
     expect(await makeReq('https://ogp.me/foobarbaz')).toStrictEqual({
       url: 'https://ogp.me/foobarbaz',
       faviconUrl: 'https://ogp.me/favicon.ico',
     } satisfies LinkCard);
+  });
 
+  it('should return a LinkCard object for https://ogp.me/logo.png', async () => {
     // Not HTML
     expect(await makeReq('https://ogp.me/logo.png')).toStrictEqual({
       url: 'https://ogp.me/logo.png',
       faviconUrl: 'https://ogp.me/favicon.ico',
     } satisfies LinkCard);
+  });
 
+  it('should return a LinkCard object for http://example.invalid/', async () => {
     // Network Error
     expect(await makeReq('http://example.invalid/')).toStrictEqual({
       url: 'http://example.invalid/',
