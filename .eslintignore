@@ -1,6 +1,7 @@
 # Yarn
-.yarn
-.pnp.*
+/.yarn
+/.pnp.*
+/node_modules
 
 # Next.js
 /.next
