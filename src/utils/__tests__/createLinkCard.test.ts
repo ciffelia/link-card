@@ -26,8 +26,31 @@ describe('createLinkCardFromUrl()', () => {
         'The Open Graph protocol enables any web page to become a rich object in a social graph.',
       faviconUrl: 'https://ogp.me/favicon.ico',
       ogImageUrl: 'https://ogp.me/logo.png',
-    });
+    } satisfies LinkCard);
 
+    // Not Found
+    expect(
+      await createLinkCardFromUrl(new URL('https://ogp.me/foobarbaz')),
+    ).toStrictEqual({
+      url: 'https://ogp.me/foobarbaz',
+      title: undefined,
+      description: undefined,
+      faviconUrl: 'https://ogp.me/favicon.ico',
+      ogImageUrl: undefined,
+    } satisfies LinkCard);
+
+    // Not HTML
+    expect(
+      await createLinkCardFromUrl(new URL('https://ogp.me/logo.png')),
+    ).toStrictEqual({
+      url: 'https://ogp.me/logo.png',
+      title: undefined,
+      description: undefined,
+      faviconUrl: 'https://ogp.me/favicon.ico',
+      ogImageUrl: undefined,
+    } satisfies LinkCard);
+
+    // Network Error
     expect(
       await createLinkCardFromUrl(new URL('http://example.invalid/')),
     ).toStrictEqual({
