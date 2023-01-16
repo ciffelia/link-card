@@ -24,11 +24,16 @@ jobs:
           cache: yarn
       - run: yarn install --immutable
       - run: yarn run build
-      - run: |
+      - name: Run tests
+        run: |
           yarn run start &
+          while ! curl --head --silent --output /dev/null $LINK_CARD_TEST_URL; do
+            echo -n .
+            sleep 0.1
+          done
           yarn run coverage
         env:
-          LINK_CARD_TEST_URL: http://localhost:3000/
+          LINK_CARD_TEST_URL: http://127.0.0.1:3000/
 
   lint:
     runs-on: ubuntu-22.04
