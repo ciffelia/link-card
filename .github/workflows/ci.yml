@@ -24,8 +24,13 @@ jobs:
           cache: yarn
       - run: yarn install --immutable
       - run: yarn run build
-      - run: |
+      - name: Run tests
+        run: |
           yarn run start &
+          while ! curl --silent --head $LINK_CARD_TEST_URL; do
+            echo -n .
+            sleep 0.1
+          done;
           curl -v $LINK_CARD_TEST_URL
           yarn run coverage
         env:
