@@ -31,10 +31,9 @@ jobs:
             echo -n .
             sleep 0.1
           done;
-          curl -v $LINK_CARD_TEST_URL
           yarn run coverage
         env:
-          LINK_CARD_TEST_URL: http://localhost:3000/
+          LINK_CARD_TEST_URL: http://127.0.0.1:3000/
 
   lint:
     runs-on: ubuntu-22.04
