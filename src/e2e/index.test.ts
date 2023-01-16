@@ -65,4 +65,17 @@ describe.concurrent('/', () => {
       url: 'http://example.invalid/',
     } satisfies LinkCard);
   });
+
+  it('should return 400 for requests with no url parameter', async () => {
+    const resp = await ky(baseUrl, { throwHttpErrors: false });
+    expect(resp.status).toBe(400);
+  });
+
+  it('should return 400 for requests with an invalid url parameter', async () => {
+    const url = new URL(baseUrl);
+    url.searchParams.set('url', 'invalid');
+
+    const resp = await ky(url, { throwHttpErrors: false });
+    expect(resp.status).toBe(400);
+  });
 });
