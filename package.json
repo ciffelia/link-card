@@ -18,7 +18,7 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
     "ky": "^0.33.2",
-    "next": "^13.1.4",
+    "next": "^13.1.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -28,7 +28,7 @@
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@vitest/coverage-c8": "^0.27.3",
     "eslint": "^8.32.0",
-    "eslint-config-next": "^13.1.4",
+    "eslint-config-next": "^13.1.5",
     "eslint-config-prettier": "^8.6.0",
     "eslint-config-standard-with-typescript": "^31.0.0",
     "eslint-plugin-import": "^2.27.5",
