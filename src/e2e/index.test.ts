@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import ky from 'ky';
-import { LinkCard } from '@/types/LinkCard';
+import { type LinkCard } from '@/types/LinkCard';
 
 describe.concurrent(
   '/',

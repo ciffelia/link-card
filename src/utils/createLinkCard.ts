@@ -1,6 +1,6 @@
 import ky from 'ky';
 import * as cheerio from 'cheerio';
-import { LinkCard } from '@/types/LinkCard';
+import { type LinkCard } from '@/types/LinkCard';
 import {
   extractDescription,
   extractFaviconUrl,

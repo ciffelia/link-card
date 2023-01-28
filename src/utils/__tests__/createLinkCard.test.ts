@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { LinkCard } from '@/types/LinkCard';
+import { type LinkCard } from '@/types/LinkCard';
 import {
   createLinkCardFromHtml,
   createLinkCardFromUrl,

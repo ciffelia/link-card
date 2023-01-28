@@ -1,4 +1,4 @@
-import * as cheerio from 'cheerio';
+import type * as cheerio from 'cheerio';
 import { fallback } from '@/utils/fallback';
 
 export const extractTitle = ($: cheerio.CheerioAPI): string | undefined =>
