@@ -2,7 +2,7 @@ import type { NextRequest } from 'next/server';
 import { createLinkCardFromUrl } from '@/utils/createLinkCard';
 
 export const config = {
-  runtime: 'experimental-edge',
+  runtime: 'edge',
 };
 
 export const handler = async (req: NextRequest): Promise<Response> => {
