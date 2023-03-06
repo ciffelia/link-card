@@ -10,14 +10,14 @@
   packageRules: [
     {
       matchManagers: ['npm'],
-      enabled: false,
       rangeStrategy: 'bump',
+      dependencyDashboardApproval: true,
     },
     {
       matchManagers: ['npm'],
       matchUpdateTypes: ['minor', 'patch'],
       matchCurrentVersion: '!/^0/',
-      enabled: true,
+      dependencyDashboardApproval: false,
       automerge: true,
     },
     {
