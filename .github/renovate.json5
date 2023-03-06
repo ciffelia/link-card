@@ -6,16 +6,18 @@
     ':prConcurrentLimitNone',
   ],
   timezone: 'Asia/Tokyo',
-  schedule: ['every weekend'],
+  schedule: ['before 9am on Saturday'],
   packageRules: [
     {
       matchManagers: ['npm'],
+      enabled: false,
       rangeStrategy: 'bump',
     },
     {
       matchManagers: ['npm'],
       matchUpdateTypes: ['minor', 'patch'],
       matchCurrentVersion: '!/^0/',
+      enabled: true,
       automerge: true,
     },
     {
