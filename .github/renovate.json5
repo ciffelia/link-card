@@ -25,5 +25,11 @@
       matchPackageNames: ['@types/node'],
       major: { enabled: false },
     },
+    {
+      // `yarn up --recursive`でアップデートしないと型定義が壊れる
+      matchPackageNames: ['vite'],
+      dependencyDashboardApproval: true,
+      automerge: false,
+    },
   ],
 }
