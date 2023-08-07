@@ -38,10 +38,12 @@ describe.concurrent(
     it('should return a LinkCard object for https://www.w3.org/', async () => {
       expect(await makeReq('https://www.w3.org/')).toStrictEqual({
         url: 'https://www.w3.org/',
-        title: 'World Wide Web Consortium (W3C)',
+        title: 'W3C',
         description:
-          'The World Wide Web Consortium (W3C) is an international community where Member organizations, a full-time staff, and the public work together to develop Web standards.',
-        faviconUrl: 'https://www.w3.org/2008/site/images/favicon.ico',
+          'The World Wide Web Consortium (W3C) develops standards and guidelines to help everyone build a web based on the principles of accessibility, internationalization, privacy and security.',
+        faviconUrl: 'https://www.w3.org/favicon.ico',
+        ogImageUrl:
+          'https://www.w3.org/assets/website-2021/images/w3c-opengraph-image.png',
       } satisfies LinkCard);
     });
 
