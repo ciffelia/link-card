@@ -21,8 +21,8 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: .next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**/*.[jt]sx?') }}
-          restore-keys: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-
+          key: nextjs-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**/*.[jt]s', '**/*.[jt]sx') }}
+          restore-keys: nextjs-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-
       - run: yarn install --immutable
       - run: yarn run build
 
@@ -38,8 +38,8 @@ jobs:
       - uses: actions/cache/restore@v3
         with:
           path: .next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**/*.[jt]sx?') }}
-          restore-keys: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-
+          key: nextjs-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**/*.[jt]s', '**/*.[jt]sx') }}
+          restore-keys: nextjs-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-
       - run: yarn install --immutable
       - run: yarn run build
       - name: Run tests
