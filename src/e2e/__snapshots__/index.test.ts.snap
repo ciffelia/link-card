@@ -1,0 +1,49 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`/ > should return a LinkCard object for http://example.com/ 1`] = `
+{
+  "faviconUrl": "http://example.com/favicon.ico",
+  "title": "Example Domain",
+  "url": "http://example.com/",
+}
+`;
+
+exports[`/ > should return a LinkCard object for http://example.invalid/ 1`] = `
+{
+  "url": "http://example.invalid/",
+}
+`;
+
+exports[`/ > should return a LinkCard object for https://ogp.me/ 1`] = `
+{
+  "description": "The Open Graph protocol enables any web page to become a rich object in a social graph.",
+  "faviconUrl": "https://ogp.me/favicon.ico",
+  "ogImageUrl": "https://ogp.me/logo.png",
+  "title": "Open Graph protocol",
+  "url": "https://ogp.me/",
+}
+`;
+
+exports[`/ > should return a LinkCard object for https://ogp.me/foobarbaz 1`] = `
+{
+  "faviconUrl": "https://ogp.me/favicon.ico",
+  "url": "https://ogp.me/foobarbaz",
+}
+`;
+
+exports[`/ > should return a LinkCard object for https://ogp.me/logo.png 1`] = `
+{
+  "faviconUrl": "https://ogp.me/favicon.ico",
+  "url": "https://ogp.me/logo.png",
+}
+`;
+
+exports[`/ > should return a LinkCard object for https://www.w3.org/ 1`] = `
+{
+  "description": "The World Wide Web Consortium (W3C) develops standards and guidelines to help everyone build a web based on the principles of accessibility, internationalization, privacy and security.",
+  "faviconUrl": "https://www.w3.org/favicon.ico",
+  "ogImageUrl": "https://www.w3.org/assets/website-2021/images/w3c-opengraph-image.png",
+  "title": "W3C",
+  "url": "https://www.w3.org/",
+}
+`;

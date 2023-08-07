@@ -1,6 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, it } from 'vitest';
 import ky from 'ky';
-import { type LinkCard } from '@/types/LinkCard';
 
 describe.concurrent(
   '/',
@@ -10,72 +9,33 @@ describe.concurrent(
     }
     const baseUrl = new URL(process.env.LINK_CARD_TEST_URL);
 
-    const makeReq = async (urlParam: string): Promise<unknown> => {
-      const url = new URL(baseUrl);
-      url.searchParams.set('url', urlParam);
-      return await ky(url).json();
-    };
+    const cases = [
+      'http://example.com/',
+      'https://ogp.me/',
+      'https://www.w3.org/',
+      'https://ogp.me/foobarbaz',
+      'https://ogp.me/logo.png',
+      'http://example.invalid/',
+    ] as const satisfies readonly string[];
 
-    it('should return a LinkCard object for http://example.com/', async () => {
-      expect(await makeReq('http://example.com/')).toStrictEqual({
-        url: 'http://example.com/',
-        title: 'Example Domain',
-        faviconUrl: 'http://example.com/favicon.ico',
-      } satisfies LinkCard);
-    });
+    for (const url of cases) {
+      it(`should return a LinkCard object for ${url}`, async ({ expect }) => {
+        const endpointUrl = new URL(baseUrl);
+        endpointUrl.searchParams.set('url', url);
+        expect(await ky(endpointUrl).json()).toMatchSnapshot();
+      });
+    }
 
-    it('should return a LinkCard object for https://ogp.me/', async () => {
-      expect(await makeReq('https://ogp.me/')).toStrictEqual({
-        url: 'https://ogp.me/',
-        title: 'Open Graph protocol',
-        description:
-          'The Open Graph protocol enables any web page to become a rich object in a social graph.',
-        faviconUrl: 'https://ogp.me/favicon.ico',
-        ogImageUrl: 'https://ogp.me/logo.png',
-      } satisfies LinkCard);
-    });
-
-    it('should return a LinkCard object for https://www.w3.org/', async () => {
-      expect(await makeReq('https://www.w3.org/')).toStrictEqual({
-        url: 'https://www.w3.org/',
-        title: 'W3C',
-        description:
-          'The World Wide Web Consortium (W3C) develops standards and guidelines to help everyone build a web based on the principles of accessibility, internationalization, privacy and security.',
-        faviconUrl: 'https://www.w3.org/favicon.ico',
-        ogImageUrl:
-          'https://www.w3.org/assets/website-2021/images/w3c-opengraph-image.png',
-      } satisfies LinkCard);
-    });
-
-    it('should return a LinkCard object for https://ogp.me/foobarbaz', async () => {
-      // Not Found
-      expect(await makeReq('https://ogp.me/foobarbaz')).toStrictEqual({
-        url: 'https://ogp.me/foobarbaz',
-        faviconUrl: 'https://ogp.me/favicon.ico',
-      } satisfies LinkCard);
-    });
-
-    it('should return a LinkCard object for https://ogp.me/logo.png', async () => {
-      // Not HTML
-      expect(await makeReq('https://ogp.me/logo.png')).toStrictEqual({
-        url: 'https://ogp.me/logo.png',
-        faviconUrl: 'https://ogp.me/favicon.ico',
-      } satisfies LinkCard);
-    });
-
-    it('should return a LinkCard object for http://example.invalid/', async () => {
-      // Network Error
-      expect(await makeReq('http://example.invalid/')).toStrictEqual({
-        url: 'http://example.invalid/',
-      } satisfies LinkCard);
-    });
-
-    it('should return 400 for requests with no url parameter', async () => {
+    it('should return 400 for requests with no url parameter', async ({
+      expect,
+    }) => {
       const resp = await ky(baseUrl, { throwHttpErrors: false });
       expect(resp.status).toBe(400);
     });
 
-    it('should return 400 for requests with an invalid url parameter', async () => {
+    it('should return 400 for requests with an invalid url parameter', async ({
+      expect,
+    }) => {
       const url = new URL(baseUrl);
       url.searchParams.set('url', 'invalid');
 

@@ -1,0 +1,87 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`createLinkCardFromHtml() > should return a LinkCard object #{1} 1`] = `
+{
+  "description": undefined,
+  "faviconUrl": "https://link-card.example/favicon.ico",
+  "ogImageUrl": undefined,
+  "title": undefined,
+  "url": "https://link-card.example/article/cat",
+}
+`;
+
+exports[`createLinkCardFromHtml() > should return a LinkCard object #{2} 1`] = `
+{
+  "description": "私はその人を常に先生と呼んでいた。",
+  "faviconUrl": "https://link-card.example/static/favicon.png",
+  "ogImageUrl": undefined,
+  "title": "こころ - 夏目漱石",
+  "url": "https://link-card.example/article/kokoro",
+}
+`;
+
+exports[`createLinkCardFromHtml() > should return a LinkCard object #{3} 1`] = `
+{
+  "description": "私はその人を常に先生と呼んでいた。だからここでもただ先生と書くだけで本名は打ち明けない。",
+  "faviconUrl": "https://link-card.example/article/images/favicon.png",
+  "ogImageUrl": "https://link-card.example/static/og.png",
+  "title": "こころ",
+  "url": "https://link-card.example/article/kokoro/detail.html",
+}
+`;
+
+exports[`createLinkCardFromUrl() > should return a LinkCard object for http://example.com/ 1`] = `
+{
+  "description": undefined,
+  "faviconUrl": "http://example.com/favicon.ico",
+  "ogImageUrl": undefined,
+  "title": "Example Domain",
+  "url": "http://example.com/",
+}
+`;
+
+exports[`createLinkCardFromUrl() > should return a LinkCard object for http://example.invalid/ 1`] = `
+{
+  "url": "http://example.invalid/",
+}
+`;
+
+exports[`createLinkCardFromUrl() > should return a LinkCard object for https://ogp.me/ 1`] = `
+{
+  "description": "The Open Graph protocol enables any web page to become a rich object in a social graph.",
+  "faviconUrl": "https://ogp.me/favicon.ico",
+  "ogImageUrl": "https://ogp.me/logo.png",
+  "title": "Open Graph protocol",
+  "url": "https://ogp.me/",
+}
+`;
+
+exports[`createLinkCardFromUrl() > should return a LinkCard object for https://ogp.me/foobarbaz 1`] = `
+{
+  "description": undefined,
+  "faviconUrl": "https://ogp.me/favicon.ico",
+  "ogImageUrl": undefined,
+  "title": undefined,
+  "url": "https://ogp.me/foobarbaz",
+}
+`;
+
+exports[`createLinkCardFromUrl() > should return a LinkCard object for https://ogp.me/logo.png 1`] = `
+{
+  "description": undefined,
+  "faviconUrl": "https://ogp.me/favicon.ico",
+  "ogImageUrl": undefined,
+  "title": undefined,
+  "url": "https://ogp.me/logo.png",
+}
+`;
+
+exports[`createLinkCardFromUrl() > should return a LinkCard object for https://www.w3.org/ 1`] = `
+{
+  "description": "The World Wide Web Consortium (W3C) develops standards and guidelines to help everyone build a web based on the principles of accessibility, internationalization, privacy and security.",
+  "faviconUrl": "https://www.w3.org/favicon.ico",
+  "ogImageUrl": "https://www.w3.org/assets/website-2021/images/w3c-opengraph-image.png",
+  "title": "W3C",
+  "url": "https://www.w3.org/",
+}
+`;
