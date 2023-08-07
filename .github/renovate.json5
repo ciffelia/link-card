@@ -8,28 +8,11 @@
   ],
   timezone: 'Asia/Tokyo',
   schedule: ['before 9am on Saturday'],
+  dependencyDashboardApproval: true,
   packageRules: [
     {
       matchManagers: ['npm'],
       rangeStrategy: 'bump',
-      dependencyDashboardApproval: true,
-    },
-    {
-      matchManagers: ['npm'],
-      matchUpdateTypes: ['minor', 'patch'],
-      matchCurrentVersion: '!/^0/',
-      dependencyDashboardApproval: false,
-      automerge: true,
-    },
-    {
-      matchPackageNames: ['@types/node'],
-      major: { enabled: false },
-    },
-    {
-      // `yarn up --recursive`でアップデートしないと型定義が壊れる
-      matchPackageNames: ['vite'],
-      dependencyDashboardApproval: true,
-      automerge: false,
     },
   ],
 }
