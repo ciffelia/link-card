@@ -1,18 +1,10 @@
 {
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
   extends: [
-    'config:base',
-    ':semanticCommitsDisabled',
+    'config:recommended',
+    'helpers:pinGitHubActionDigestsToSemver',
     ':prHourlyLimitNone',
     ':prConcurrentLimitNone',
-  ],
-  timezone: 'Asia/Tokyo',
-  schedule: ['before 9am on Saturday'],
-  dependencyDashboardApproval: true,
-  packageRules: [
-    {
-      matchManagers: ['npm'],
-      rangeStrategy: 'bump',
-    },
+    ':dependencyDashboardApproval',
   ],
 }
