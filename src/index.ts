@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { createLinkCardFromUrl, type Fetcher } from "./link-card";
 
-export const createApp = (fetcher: Fetcher = fetch) => {
+export const createApp = (fetcher?: Fetcher) => {
 	const app = new Hono<{ Bindings: CloudflareBindings }>();
 
 	app.get("/", async (c) => {
