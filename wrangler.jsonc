@@ -3,6 +3,9 @@
 	"name": "link-card",
 	"main": "src/index.ts",
 	"compatibility_date": "2026-07-27",
+	"cache": {
+		"enabled": true,
+	},
 	"observability": {
 		"enabled": true,
 	},
