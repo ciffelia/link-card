@@ -1,35 +1,40 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "lib": ["ESNext", "DOM", "DOM.Iterable"],
-    "jsx": "preserve",
+	"compilerOptions": {
+		"noEmit": true,
 
-    "noEmit": true,
-    "incremental": true,
+		"target": "esnext",
+		"lib": ["esnext"],
+		"types": ["./worker-configuration.d.ts", "node"],
 
-    "strict": true,
+		"jsx": "react-jsx",
+		"jsxImportSource": "hono/jsx",
 
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
+		"module": "preserve",
+		"moduleResolution": "bundler",
+		"moduleDetection": "force",
+		"isolatedModules": true,
+		"verbatimModuleSyntax": true,
+		"allowImportingTsExtensions": true,
+		"resolveJsonModule": true,
 
-    "allowJs": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
+		"allowJs": true,
+		"checkJs": false,
+		"skipLibCheck": true,
 
-    "baseUrl": "./src",
-    "paths": {
-      "@/*": ["./*"]
-    }
-  },
-
-  "include": [
-    "./next.config.js",
-    "./next-env.d.ts",
-    "./vitest.config.ts",
-    "./src/**/*"
-  ],
-  "exclude": ["./node_modules"]
+		"strict": true,
+		"allowUnusedLabels": false,
+		"allowUnreachableCode": false,
+		"erasableSyntaxOnly": true,
+		"exactOptionalPropertyTypes": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitOverride": true,
+		"noImplicitReturns": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"noUncheckedIndexedAccess": true,
+		"noUncheckedSideEffectImports": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true
+	},
+	"include": ["worker-configuration.d.ts", "src"],
+	"exclude": ["test"]
 }
