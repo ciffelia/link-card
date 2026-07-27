@@ -193,7 +193,6 @@ export const createLinkCardFromUrl = async (
 				accept: "text/html,application/xhtml+xml;q=0.9,*/*;q=0.1",
 				"user-agent": "link-card/1.0",
 			},
-			redirect: "follow",
 		});
 		return await createLinkCardFromResponse(response, url);
 	} catch {
