@@ -1,0 +1,50 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`fetches http://example.com/ through the Worker 1`] = `
+{
+  "faviconUrl": "data:,",
+  "title": "Example Domain",
+  "url": "http://example.com/",
+}
+`;
+
+exports[`fetches http://example.invalid/ through the Worker 1`] = `
+{
+  "url": "http://example.invalid/",
+}
+`;
+
+exports[`fetches https://ogp.me/ through the Worker 1`] = `
+{
+  "description": "The Open Graph protocol enables any web page to become a rich object in a social graph.",
+  "faviconUrl": "https://ogp.me/favicon.ico",
+  "ogImageUrl": "https://ogp.me/logo.png",
+  "title": "Open Graph protocol",
+  "url": "https://ogp.me/",
+}
+`;
+
+exports[`fetches https://ogp.me/foobarbaz through the Worker 1`] = `
+{
+  "faviconUrl": "https://ogp.me/favicon.ico",
+  "title": "Page not found &middot; GitHub Pages",
+  "url": "https://ogp.me/foobarbaz",
+}
+`;
+
+exports[`fetches https://ogp.me/logo.png through the Worker 1`] = `
+{
+  "faviconUrl": "https://ogp.me/favicon.ico",
+  "url": "https://ogp.me/logo.png",
+}
+`;
+
+exports[`fetches https://www.w3.org/ through the Worker 1`] = `
+{
+  "description": "The World Wide Web Consortium (W3C) develops standards and guidelines to help everyone build a web based on the principles of accessibility, internationalization, privacy and security.",
+  "faviconUrl": "https://www.w3.org/assets/logos/w3c-2025/favicons/favicon-32.png",
+  "ogImageUrl": "https://www.w3.org/assets/website-2021/images/w3c-opengraph-image.png",
+  "title": "W3C",
+  "url": "https://www.w3.org/",
+}
+`;
