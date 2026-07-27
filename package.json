@@ -18,13 +18,13 @@
 		"hono": "^4.12.32"
 	},
 	"devDependencies": {
-		"@cloudflare/vitest-pool-workers": "^0.12.4",
+		"@cloudflare/vitest-pool-workers": "^0.18.8",
 		"@types/node": "^26.1.1",
 		"oxfmt": "^0.60.0",
 		"oxlint": "^1.75.0",
 		"oxlint-tsgolint": "^7.0.2001",
 		"typescript": "^5.5.2",
-		"vitest": "~3.2.0",
+		"vitest": "^4.1.10",
 		"wrangler": "^4.114.0"
 	}
 }
