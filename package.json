@@ -7,7 +7,7 @@
 		"dev": "wrangler dev",
 		"start": "wrangler dev",
 		"test": "vitest",
-		"typecheck": "tsc",
+		"typecheck": "tsc && tsc -p test",
 		"lint": "oxlint",
 		"lint:fix": "oxlint --fix",
 		"fmt": "oxfmt",
