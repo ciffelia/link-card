@@ -7,8 +7,8 @@
 		"dev": "wrangler dev",
 		"start": "wrangler dev",
 		"test": "vitest",
-    "fmt": "oxfmt",
-    "fmt:check": "oxfmt --check",
+		"fmt": "oxfmt",
+		"fmt:check": "oxfmt --check",
 		"cf-typegen": "wrangler types"
 	},
 	"devDependencies": {
