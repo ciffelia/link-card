@@ -55,6 +55,7 @@ describe("link card worker", () => {
 
 	it("returns a minimal card when the upstream request fails", async () => {
 		vi.spyOn(globalThis, "fetch").mockRejectedValue(new Error("unavailable"));
+		vi.spyOn(console, "error").mockImplementation(() => {});
 
 		const response = await fetchWorker("/?url=https%3A%2F%2Funavailable.example%2F");
 

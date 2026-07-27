@@ -1,5 +1,9 @@
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { createLinkCardFromHtml, createLinkCardFromUrl } from "../src/link-card";
+
+afterEach(() => {
+	vi.restoreAllMocks();
+});
 
 describe("createLinkCardFromHtml", () => {
 	it("uses the page URL and default favicon when metadata is absent", async () => {
@@ -199,11 +203,31 @@ describe("createLinkCardFromUrl", () => {
 
 	it("returns a minimal card when fetching fails", async () => {
 		const fetcher = vi.fn<typeof fetch>().mockRejectedValue(new Error("failed"));
+		vi.spyOn(console, "error").mockImplementation(() => {});
 
 		await expect(
 			createLinkCardFromUrl(new URL("https://unavailable.example/"), fetcher),
 		).resolves.toEqual({
 			url: "https://unavailable.example/",
 		});
+	});
+
+	it("logs fetch failures as structured errors", async () => {
+		const fetcher = vi.fn<typeof fetch>().mockRejectedValue(new Error("failed"));
+		const errorLog = vi.spyOn(console, "error").mockImplementation(() => {});
+
+		await createLinkCardFromUrl(new URL("https://unavailable.example/"), fetcher);
+
+		expect(errorLog).toHaveBeenCalledOnce();
+		expect(errorLog).toHaveBeenCalledWith(
+			JSON.stringify({
+				message: "link card request failed",
+				url: "https://unavailable.example/",
+				error: {
+					name: "Error",
+					message: "failed",
+				},
+			}),
+		);
 	});
 });

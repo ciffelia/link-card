@@ -148,7 +148,17 @@ export const createLinkCardFromUrl = async (
 			},
 		});
 		return await createLinkCardFromResponse(response, url);
-	} catch {
+	} catch (error) {
+		console.error(
+			JSON.stringify({
+				message: "link card request failed",
+				url: url.toString(),
+				error: {
+					name: error instanceof Error ? error.name : "UnknownError",
+					message: error instanceof Error ? error.message : String(error),
+				},
+			}),
+		);
 		return { url: url.toString() };
 	}
 };
