@@ -8,7 +8,6 @@ export interface LinkCard {
 
 export type Fetcher = (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
 
-const MAX_HTML_BYTES = 1024 * 1024;
 const MAX_TEXT_LENGTH = 256;
 const MAX_URL_LENGTH = 8192;
 
@@ -27,41 +26,7 @@ const toUrl = (value: string | undefined, base?: URL): URL | undefined => {
 	}
 };
 
-const limitBody = (
-	body: ReadableStream<Uint8Array>,
-	maxBytes: number,
-): ReadableStream<Uint8Array> => {
-	const reader = body.getReader();
-	let remainingBytes = maxBytes;
-
-	return new ReadableStream({
-		async pull(controller) {
-			const { done, value } = await reader.read();
-			if (done) {
-				controller.close();
-				return;
-			}
-
-			if (value.byteLength <= remainingBytes) {
-				controller.enqueue(value);
-				remainingBytes -= value.byteLength;
-			} else {
-				controller.enqueue(value.subarray(0, remainingBytes));
-				remainingBytes = 0;
-			}
-
-			if (remainingBytes === 0) {
-				await reader.cancel();
-				controller.close();
-			}
-		},
-		cancel(reason) {
-			return reader.cancel(reason);
-		},
-	});
-};
-
-const drain = async (response: Response): Promise<void> => {
+const consumeBody = async (response: Response): Promise<void> => {
 	const reader = response.body?.getReader();
 	if (reader === undefined) {
 		return;
@@ -105,18 +70,6 @@ export const createLinkCardFromResponse = async (
 	pageUrl: URL,
 ): Promise<LinkCard> => {
 	const metadata: Metadata = { title: "" };
-	const body =
-		response.body === null
-			? new ReadableStream<Uint8Array>({
-					start(controller) {
-						controller.close();
-					},
-				})
-			: limitBody(response.body, MAX_HTML_BYTES);
-	const limitedResponse = new Response(body, {
-		headers: response.headers,
-	});
-
 	const transformedResponse = new HTMLRewriter()
 		.on("title", {
 			text(text) {
@@ -144,9 +97,9 @@ export const createLinkCardFromResponse = async (
 		)
 		.on('link[rel~="icon"]', captureFirstAttribute(metadata, "faviconHref", "href"))
 		.on("base", captureFirstAttribute(metadata, "baseHref", "href"))
-		.transform(limitedResponse);
+		.transform(response);
 
-	await drain(transformedResponse);
+	await consumeBody(transformedResponse);
 
 	const title = fallback(metadata.openGraphTitle, metadata.twitterTitle, metadata.title);
 	const description = fallback(
