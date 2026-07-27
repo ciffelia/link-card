@@ -73,7 +73,9 @@ export const createLinkCardFromResponse = async (
 	const transformedResponse = new HTMLRewriter()
 		.on("title", {
 			text(text) {
-				metadata.title += text.text;
+				if (metadata.title.length < MAX_TEXT_LENGTH) {
+					metadata.title = (metadata.title + text.text).slice(0, MAX_TEXT_LENGTH);
+				}
 			},
 		})
 		.on('meta[property="og:title"]', captureFirstAttribute(metadata, "openGraphTitle", "content"))
