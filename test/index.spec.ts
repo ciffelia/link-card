@@ -119,6 +119,60 @@ describe("createLinkCardFromHtml", () => {
 		expect(result.title).toHaveLength(256);
 		expect(result.description).toHaveLength(256);
 	});
+
+	it("uses the first repeated metadata value and preserves Unicode", async () => {
+		const result = await createLinkCardFromHtml(
+			`
+				<meta property="og:title" content="こんにちは👩🏻‍👩🏻‍👧🏻‍👧🏻">
+				<meta property="og:title" content="ignored">
+			`,
+			new URL("https://link-card.example/"),
+		);
+
+		expect(result.title).toBe("こんにちは👩🏻‍👩🏻‍👧🏻‍👧🏻");
+	});
+
+	it("supports shortcut icon links", async () => {
+		const result = await createLinkCardFromHtml(
+			'<link rel="shortcut icon" href="assets/icon.png">',
+			new URL("https://link-card.example/article/"),
+		);
+
+		expect(result.faviconUrl).toBe("https://link-card.example/article/assets/icon.png");
+	});
+
+	it("ignores invalid favicon URLs", async () => {
+		const result = await createLinkCardFromHtml(
+			'<link rel="icon" href="///">',
+			new URL("https://link-card.example/"),
+		);
+
+		expect(result.faviconUrl).toBeUndefined();
+	});
+
+	it("falls back to the page URL when the base URL is invalid", async () => {
+		const result = await createLinkCardFromHtml(
+			`
+				<base href="///">
+				<link rel="icon" href="assets/icon.png">
+			`,
+			new URL("https://link-card.example/article/"),
+		);
+
+		expect(result.faviconUrl).toBe("https://link-card.example/article/assets/icon.png");
+	});
+
+	it.each([
+		["https://link-card.example/article/", "https://link-card.example/article/assets/icon.png"],
+		["https://link-card.example/article", "https://link-card.example/assets/icon.png"],
+	])("resolves relative favicon URLs against %s", async (url, expected) => {
+		const result = await createLinkCardFromHtml(
+			'<link rel="icon" href="assets/icon.png">',
+			new URL(url),
+		);
+
+		expect(result.faviconUrl).toBe(expected);
+	});
 });
 
 describe("createLinkCardFromUrl", () => {
