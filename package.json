@@ -15,17 +15,17 @@
 		"cf-typegen": "wrangler types --env-interface CloudflareBindings"
 	},
 	"dependencies": {
-		"hono": "^4.12.32"
+		"hono": "^4.13.16"
 	},
 	"devDependencies": {
-		"@cloudflare/vitest-pool-workers": "^0.18.8",
-		"@types/node": "^26.1.1",
-		"oxfmt": "^0.60.0",
-		"oxlint": "^1.75.0",
-		"oxlint-tsgolint": "^7.0.2001",
+		"@cloudflare/vitest-plugin": "^1.6.0",
+		"@types/node": "^26.6.6",
+		"oxfmt": "^0.77.0",
+		"oxlint": "^1.92.0",
+		"oxlint-tsgolint": "^7.0.2006",
 		"typescript": "^7.0.2",
-		"vitest": "^4.1.10",
-		"wrangler": "^4.114.0"
+		"vitest": "^5.1.0",
+		"wrangler": "^4.158.0"
 	},
 	"packageManager": "pnpm@11.17.0"
 }
