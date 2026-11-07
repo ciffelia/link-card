@@ -30,7 +30,7 @@ jobs:
 
       - run: pnpm run test
 
-  typecheck:
+  check:
     runs-on: ubuntu-26.04
     permissions:
       contents: read
@@ -49,49 +49,7 @@ jobs:
 
       - run: pnpm ci
 
-      - run: pnpm run typecheck
-
-  lint:
-    runs-on: ubuntu-26.04
-    permissions:
-      contents: read
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@v7.0.1
-        with:
-          persist-credentials: false
-
-      - uses: pnpm/action-setup@v6.1.1
-
-      - uses: actions/setup-node@v7.1.0
-        with:
-          node-version-file: .node-version
-          cache: pnpm
-
-      - run: pnpm ci
-
-      - run: pnpm run lint
-
-  format:
-    runs-on: ubuntu-26.04
-    permissions:
-      contents: read
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@v7.0.1
-        with:
-          persist-credentials: false
-
-      - uses: pnpm/action-setup@v6.1.1
-
-      - uses: actions/setup-node@v7.1.0
-        with:
-          node-version-file: .node-version
-          cache: pnpm
-
-      - run: pnpm ci
-
-      - run: pnpm run fmt:check
+      - run: pnpm run check
 
   cf-typegen:
     runs-on: ubuntu-26.04
