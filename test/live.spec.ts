@@ -1,5 +1,5 @@
 import { exports } from "cloudflare:workers";
-import { expect, it } from "vitest";
+import { expect, it } from "vite-plus/test";
 
 const urls = [
 	"http://example.com/",

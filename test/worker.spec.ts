@@ -1,5 +1,5 @@
 import { exports } from "cloudflare:workers";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vite-plus/test";
 
 const fetchWorker = (path: string, init?: RequestInit) =>
 	exports.default.fetch(new Request(`https://worker.example${path}`, init));
