@@ -21,7 +21,7 @@
 	"devDependencies": {
 		"@cloudflare/vitest-plugin": "^1.6.0",
 		"@types/node": "^26.6.6",
-		"vite-plus": "1.5.0",
+		"vite-plus": "catalog:",
 		"wrangler": "^4.158.0"
 	},
 	"packageManager": "pnpm@12.18.0"

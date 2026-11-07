@@ -187,6 +187,15 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    vite-plus:
+      specifier: 1.5.0
+      version: 1.5.0
+
+overrides:
+  vite@*: npm:@voidzero-dev/vite-plus-core@1.5.0
+
 importers:
 
   .:
@@ -202,7 +211,7 @@ importers:
         specifier: ^26.6.6
         version: 26.6.6
       vite-plus:
-        specifier: 1.5.0
+        specifier: 'catalog:'
         version: 1.5.0(@types/node@26.6.6)(@vitest/ui@5.1.0)(esbuild@0.28.2)(typescript@7.0.2)
       wrangler:
         specifier: ^4.158.0
