@@ -2,7 +2,7 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "link-card",
 	"main": "src/index.ts",
-	"compatibility_date": "2026-07-27",
+	"compatibility_date": "2026-11-07",
 	"cache": {
 		"enabled": true,
 	},
